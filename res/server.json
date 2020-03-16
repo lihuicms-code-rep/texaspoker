@@ -1,0 +1,11 @@
+{
+  "host": "0.0.0.0",
+  "ipVersion": "tcp4",
+  "port": 7777,
+  "name": "texas poker game server",
+  "version": "v0.1",
+  "maxConn": 3000,
+  "maxPackageSize": 1024,
+  "workerPoolSize": 4,
+  "maxWorkerTaskLen": 100
+}
