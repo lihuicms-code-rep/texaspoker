@@ -58,7 +58,6 @@ func initSingleZapLogger(path, filename string, encoderType int) *zap.SugaredLog
 //Writer
 func getLogWriter(path, filename string) zapcore.WriteSyncer {
 	fn := fmt.Sprintf("%s%s", path, filename)
-	fmt.Println("getLogWriter fn", fn)
 	lumberJackLogger := &lumberjack.Logger{
 		Filename:   fn,   //文件路径
 		MaxSize:    10,   //进行切割之前,日志最大大小MB

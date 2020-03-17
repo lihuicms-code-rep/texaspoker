@@ -1,0 +1,17 @@
+{
+  "mysql": {
+    "username": "root",
+    "password": "Lh123#",
+    "protocol": "tcp",
+    "address": "localhost:3306",
+    "dbname": "texaspoker",
+    "params": {
+      "parseTime": "true"
+    }
+  },
+  "redis": {
+    "address": "47.101.42.68:6379",
+    "password": "",
+    "dbnumber": 0
+  }
+}
