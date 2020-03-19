@@ -1,2 +1,4 @@
 #!/usr/bin/env bash
-./texaspoker.exe -config ./res/
+mkdir ./backLog/
+./texaspoker.exe -config ./res/ -st 2 2>&1 > ./backLog/texaspoker.log &
+echo "start texaspoker by daemon mode success"

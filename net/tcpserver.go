@@ -7,17 +7,17 @@ import (
 	"github.com/lihuicms-code-rep/zinx/znet"
 )
 
-func StartServer() {
+func StartTCPServer() {
 	var server ziface.IServer
 	server = znet.NewServer()
-	log.Console.Infof("server:%s start and serve", config.ServerConfig.Name)
+	log.Console.Infof("server:%s start and serve", config.TCPServerConfig.Name)
 
 	//注册Hook函数
 	server.SetOnConnStart(OnConnectionStart)
 	server.SetOnConnStop(OnConnectionLost)
 
 	//注册业务路由
-	for id, router := range routers {
+	for id, router := range tcpRouters {
 		server.AddRouter(uint32(id), router)
 	}
 

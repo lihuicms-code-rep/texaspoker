@@ -35,3 +35,6 @@ func Connect(dsn string) error {
 	log.Console.Info("connect to mysql success")
 	return nil
 }
+
+
+

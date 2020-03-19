@@ -4,7 +4,7 @@ import (
 	"github.com/lihuicms-code-rep/texaspoker/log"
 	"github.com/lihuicms-code-rep/zinx/ziface"
 )
-
+//TCP连接建立后的HOOK函数
 
 //连接建立后要做的工作
 func OnConnectionStart(conn ziface.IConnection) {

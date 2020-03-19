@@ -12,11 +12,13 @@ import (
 //启动参数
 var (
 	configPath  string //配置路径
+	serverType int      //服务类型
 )
 
 func init() {
 	//命令行参数
 	flag.StringVar(&configPath, "config", "./res/", "game config path")
+	flag.IntVar(&serverType, "st", 1, "server type")
 	flag.Parse()
 
 	//logger初始化
@@ -34,5 +36,10 @@ func init() {
 
 func main() {
 	//网络启动
-	net.StartServer()
+	switch serverType {
+	case 2:
+		net.StartHttpServer()
+	default:
+		net.StartTCPServer()
+	}
 }

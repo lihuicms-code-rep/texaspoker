@@ -10,14 +10,16 @@ import (
 
 //配置对象
 var (
-	ServerConfig = NewServerConfig()
-	DBConfig     = NewDBConfig()
+	TCPServerConfig  = NewTCPServerConfig()
+	HTTPServerConfig = NewHTTPServerConfig()
+	DBConfig         = NewDBConfig()
 )
 
-//配置名,配置示例对应关系
+//配置名,配置实例对应关系
 var configNames = map[string]interface{}{
-	"server": ServerConfig,
-	"db":     DBConfig,
+	"tcpserver":  TCPServerConfig,
+	"httpserver": HTTPServerConfig,
+	"db":         DBConfig,
 }
 
 //Load配置
@@ -29,7 +31,8 @@ func Load(path string) {
 			break
 		}
 	}
-	log.Console.Infof("Load Config Ok, ServerConfig:%+v", ServerConfig)
+	log.Console.Infof("Load Config Ok, TCPServerConfig:%+v", TCPServerConfig)
+	log.Console.Infof("Load Config Ok, HTTPServerConfig:%+v", HTTPServerConfig)
 	log.Console.Infof("Load Config Ok, DBConfig:%+v", DBConfig)
 }
 
@@ -38,6 +41,7 @@ func getFileName(path, name string) string {
 }
 
 //获取MySQL连接串
+//dsn串结构:[username[:password]@][protocol[(address)]]/dbname[?param1=value1&...&paramN=valueN]
 func GetMySQLDSN() string {
 	dsn := ""
 	paramStr := ""
@@ -57,5 +61,4 @@ func GetMySQLDSN() string {
 	}
 
 	return dsn
-
 }

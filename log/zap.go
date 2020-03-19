@@ -11,13 +11,15 @@ import (
 
 //不同类型logger
 var (
-	Console *zap.SugaredLogger //控制台
-	Logic   *zap.SugaredLogger //游戏逻辑
+	Console     *zap.SugaredLogger //游戏控制台
+	Logic       *zap.SugaredLogger //游戏逻辑
+	HttpConsole *zap.SugaredLogger //http服务控制台
 )
 
 const (
 	consolePath = "./gameLog/console/"
 	logicPath   = "./gameLog/logic/"
+	httpPath    = "./gameLog/http/"
 )
 
 //初始化所有ZapLogger
@@ -26,9 +28,11 @@ func InitZapLogger() {
 	timeStr := fmt.Sprintf("%04d-%02d-%02d", t.Year(), t.Month(), t.Day())
 	cName := fmt.Sprintf("server_%s.log", timeStr)
 	lName := fmt.Sprintf("game_%s.log", timeStr)
+	hName := fmt.Sprintf("http_%s.log", timeStr)
 
 	Console = initSingleZapLogger(consolePath, cName, 0)
 	Logic = initSingleZapLogger(logicPath, lName, 1)
+	HttpConsole = initSingleZapLogger(httpPath, hName, 0)
 }
 
 //初始化具体logger

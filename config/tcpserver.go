@@ -2,7 +2,7 @@ package config
 
 //服务器框架层所需配置字段
 //约定,json字段部分也按驼峰
-type Server struct {
+type TCPServer struct {
 	Host             string `json:"host"`             //主机
 	IPVersion        string `json:"ipVersion"`        //ip版本
 	Port             uint32 `json:"port"`             //监听端口
@@ -14,6 +14,6 @@ type Server struct {
 	MaxWorkerTaskLen uint32 `json:"maxWorkerTaskLen"` //工作goroutine最大任务队列数
 }
 
-func NewServerConfig() *Server {
-	return &Server{}
+func NewTCPServerConfig() *TCPServer {
+	return &TCPServer{}
 }
