@@ -4,7 +4,7 @@ option csharp_namespace = "Pb";
 
 //协议号
 enum GameMessage {
-    Req_Login = 0; //登录游戏
+    _ = 0;
     Req_EnterTable = 1; //请求入桌
 }
 
@@ -14,22 +14,22 @@ enum TableType {
     NinePlayer = 1; //九人
 }
 
-//桌子押注级别
+//桌子盲注级别
 enum TableLevel {
-    LevelLow_1 = 0; //初级10/20
-    LevelLow_2 = 1; //初级20/40
-    LevelLow_3 = 2; //初级50/100
-    LevelLow_4 = 3; //初级100/200
-}
-
-//登录游戏
-message ReqLogin {
-    int32 pid = 1;
+    __ = 0;
+    LevelLow_1 = 1; //初级10/20
+    LevelLow_2 = 2; //初级20/40
+    LevelLow_3 = 3; //初级50/100
+    LevelLow_4 = 4; //初级100/200
+    LevelMiddle_1 = 5; //中级250/500
+    LevelMiddle_2 = 6; //中级500/1000
+    LevelMiddle_3 = 7; //中级1000/2000
+    LevelMiddle_4 = 8; //中级2000/4000
 }
 
 //请求入桌
 message ReqEnterTable {
-    int32 pid = 1; //玩家id
+    int64 uid = 1; //玩家id
     TableType type = 2; //桌子类型
     TableLevel level = 3; //桌子盲注级别
 }
