@@ -60,7 +60,7 @@ func GetUserByID(uid int64) (*model.User, error) {
 		return nil, errors.New("uid illegal")
 	}
 
-	sqlStr := "select uid, user_name, password, create_time, login_time, logout_time from user" +
+	sqlStr := "select uid, name, password, create_time, login_time, logout_time from user" +
 		"where uid = ?"
 
 	user := model.NewUser()
@@ -75,4 +75,22 @@ func GetUserByID(uid int64) (*model.User, error) {
 	}
 
 	return user, nil
+}
+
+//根据玩家id和密码查询玩家,用于玩家登录判断
+func CheckLogin(uid uint32, password string) (bool, string) {
+	if uid < 0 || password == "" {
+		return false, ""
+	}
+
+	sqlStr := "select name from user where uid=? and password=?"
+	user := model.NewUser()
+	err := DB.Get(user, sqlStr, uid, password)
+
+	if err != nil {
+		log.HttpConsole.Info("uid:%d login error:%+v", uid, err)
+		return false, ""
+	}
+
+	return true, user.Name
 }

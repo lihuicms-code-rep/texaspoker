@@ -9,4 +9,5 @@ const (
 	ErrorCodeBindJSONFailed   ErrorCode = -1
 	ErrorCodeUserExists       ErrorCode = -2
 	ErrorCodeInsertUserFailed ErrorCode = -3
+	ErrorCodeLoginFailed      ErrorCode = -4
 )
