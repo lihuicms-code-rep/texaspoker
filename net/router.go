@@ -20,7 +20,7 @@ var getRouters = map[string]func(c *gin.Context){
 }
 
 var postRouters = map[string]func(c *gin.Context){
-	"/register": controller.UserRegister,
-	"/login":    controller.UserLogin,
-	"/logout":   controller.UserLogout,
+	"/user/register": controller.UserRegister,
+	"/user/login":    controller.UserLogin,
+	"/user/logout":   controller.UserLogout,
 }

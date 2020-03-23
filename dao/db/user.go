@@ -13,7 +13,7 @@ func CreateUserTable() error {
 	sqlStr := `CREATE TABLE user` +
 		`(
                 uid INT(10) NOT NULL AUTO_INCREMENT,
-                user_name VARCHAR(255) NOT NULL,
+                name VARCHAR(255) NOT NULL,
                 password VARCHAR(255) NOT NULL,
                 create_time DATETIME DEFAULT NULL,
                 login_time DATETIME DEFAULT NULL,
@@ -37,10 +37,12 @@ func InsertUser(u *model.User) (int64, error) {
 		return -1, errors.New("user is nil")
 	}
 
-	sqlStr := "insert into user(user_name, password, create_time, login_time, logout_time)" +
-		      "values(?,?,?,?,?,?)"
+	log.HttpConsole.Infof("insert user:%+v", u)
 
-	result, err := DB.Exec(sqlStr, u.UserName, u.Password, u.CreateTime, u.LoginTime, u.LogoutTime)
+	sqlStr := "insert into user(name, password, create_time, login_time, logout_time)" +
+		      "values(?,?,?,?,?)"
+
+	result, err := DB.Exec(sqlStr, u.Name, u.Password, u.CreateTime, u.LoginTime, u.LogoutTime)
 	if err != nil {
 		log.HttpConsole.Errorf("insert user table error:%+v", err)
 		return -1, errors.New("insert user table error")
@@ -52,6 +54,7 @@ func InsertUser(u *model.User) (int64, error) {
 
 
 //根据玩家id查询玩家信息
+//同时也可以作为判断该玩家是否存在的判断
 func GetUserByID(uid int64) (*model.User, error) {
 	if uid < 0 {
 		return nil, errors.New("uid illegal")
@@ -64,6 +67,11 @@ func GetUserByID(uid int64) (*model.User, error) {
 	err := DB.Get(user, sqlStr, uid)
 	if err != nil {
 		return nil, errors.New("get user by id error")
+	}
+
+	//如果查出来user部分为默认值,作为该id不存在的情况
+	if user.UID == 0 {
+		return nil, nil
 	}
 
 	return user, nil
